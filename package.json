@@ -1,0 +1,70 @@
+{
+  "name": "lab-project-checker",
+  "displayName": "Lab Project Checker",
+  "description": "Проверка проекта перед сдачей лабораторной работы.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./extension.js",
+  "scripts": {
+    "check": "node --check extension.js"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "labProjectChecker.checkProject",
+        "title": "Lab Project Checker: Проверить проект"
+      }
+    ],
+    "configuration": {
+      "title": "Lab Project Checker",
+      "properties": {
+        "labProjectChecker.requiredFiles": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Обязательные файлы и папки относительно корня проекта."
+        },
+        "labProjectChecker.requiredContent": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "required": [
+              "file",
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "file": {
+                "type": "string",
+                "minLength": 1
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "description": "Файлы и текст, который должен в них присутствовать."
+        },
+        "labProjectChecker.ignoredPaths": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Пути, которые должны игнорироваться Git."
+        }
+      }
+    }
+  }
+}
